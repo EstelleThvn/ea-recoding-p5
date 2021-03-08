@@ -1,13 +1,66 @@
 var gui = new dat.GUI();
 var params = {
     Ellipse_Size: 30,
+    Random_Seed: 0,
     Download_Image: function () { return save(); },
 };
 gui.add(params, "Ellipse_Size", 0, 100, 1);
+gui.add(params, "Random_Seed", 0, 1000, 1);
 gui.add(params, "Download_Image");
 function draw() {
-    background(0);
-    ellipse(mouseX, mouseY, params.Ellipse_Size);
+    background('#FDF1E1');
+    randomSeed(params.Random_Seed);
+    noFill();
+    strokeWeight(1);
+    stroke('#D63F20');
+    var debx = 0;
+    var deby = 0;
+    rect(debx, deby, width, height);
+    splitRectangle(debx, deby, width, height);
+    stroke('#FDF1E1');
+    strokeWeight(40);
+    rect(debx, deby, width, height);
+}
+function splitRectangle(x, y, w, h) {
+    var division, newx1, newy1, newwidth1, newheight1, newx2, newy2, newwidth2, newheight2;
+    if (random(0, 1) < 0.5) {
+        division = random(0, h);
+        newx1 = x;
+        newy1 = y;
+        newwidth1 = w;
+        newheight1 = division;
+        rect(newx1, newy1, newwidth1, newheight1);
+        if (newwidth1 >= 20 && newheight1 >= 20) {
+            splitRectangle(newx1, newy1, newwidth1, newheight1);
+        }
+        newx2 = x;
+        newy2 = y + division;
+        newwidth2 = w;
+        newheight2 = h - division;
+        rect(newx2, newy2, newwidth2, newheight2);
+        if (newwidth2 >= 20 && newheight2 >= 20) {
+            splitRectangle(newx2, newy2, newwidth2, newheight2);
+        }
+    }
+    else {
+        division = random(0, w);
+        newx1 = x;
+        newy1 = y;
+        newwidth1 = division;
+        newheight1 = h;
+        rect(newx1, newy1, newwidth1, newheight1);
+        if (newwidth1 >= 20 && newheight1 >= 20) {
+            splitRectangle(newx1, newy1, newwidth1, newheight1);
+        }
+        newx2 = x + division;
+        newy2 = y;
+        newwidth2 = w - division;
+        newheight2 = h;
+        rect(newx2, newy2, newwidth2, newheight2);
+        if (newwidth2 >= 20 && newheight2 >= 20) {
+            splitRectangle(newx2, newy2, newwidth2, newheight2);
+        }
+    }
 }
 function setup() {
     p6_CreateCanvas();
