@@ -1,5 +1,5 @@
 # Algorithmic Aesthetics : Recoding
-A recoding of an algorithmic artwork (Untitled by Georg Nees, around 1964-1968)
+A recoding of an algorithmic artwork ([Untitled by Georg Nees, around 1964-1968](http://dada.compart-bremen.de/item/artwork/432))
 
 ## My pseudo-algorithm
 
