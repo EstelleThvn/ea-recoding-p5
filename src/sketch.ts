@@ -5,7 +5,7 @@
 const gui = new dat.GUI()
 const params = {
     Ellipse_Size: 30,
-    Random_Seed: 0,
+    Random_Seed: 418,
     Download_Image: () => save(),
 }
 gui.add(params, "Ellipse_Size", 0, 100, 1)
@@ -19,78 +19,75 @@ gui.add(params, "Download_Image")
 function draw() {
     background('#FDF1E1')
     randomSeed(params.Random_Seed)
-    // background('#D63F20')
-    //ellipse(mouseX, mouseY, params.Ellipse_Size)
+
+
     noFill()
     strokeWeight(1)
     stroke('#D63F20')
     
-    let debx = 0;
-    let deby = 0;
-    rect(debx,deby,width,height) 
-    splitRectangle(debx,deby,width,height)
+    let debx = 40;
+    let deby = 60; 
+    splitRectangle(debx,deby,width-(debx*2),height-(deby*2))
 
+    //draws a rectangle on top of the very first drawn rectangle (the one that encompasses all the other rectangles) to make it disappear under the new rectangle.
     stroke('#FDF1E1')
-    strokeWeight(40)
-    rect(debx,deby,width,height) 
+    strokeWeight(2)
+    rect(debx,deby,width-(debx*2),height-(deby*2)) 
 
 }
 
+//recursive function that splits one rectangle into two new rectangles, vertically or horizontally
 function splitRectangle(x,y,w,h) {
-    let division, newx1, newy1, newwidth1, newheight1, newx2, newy2, newwidth2, newheight2;
 
     if (random(0,1) < 0.5){
-        division = random(0, h);
+        const division = random(0, h);
 
         //Rectangle 1
-        newx1 = x;
-        newy1 = y;
-        newwidth1 = w;
-        newheight1 = division;
+        const newx1 = x;
+        const newy1 = y;
+        const newwidth1 = w;
+        const newheight1 = division;
         rect(newx1,newy1,newwidth1,newheight1)
 
-        if(newwidth1 >= 20 && newheight1 >=20){
-            // stroke('#000')
+        if(newwidth1 >= 15 && newheight1 >=15){
             splitRectangle(newx1,newy1,newwidth1,newheight1)
         }
 
         //Rectangle 2
-        newx2 = x;
-        newy2 = y+division;
-        newwidth2 = w;
-        newheight2 = h-division;
+        const newx2 = x;
+        const newy2 = y+division;
+        const newwidth2 = w;
+        const newheight2 = h-division;
         rect(newx2,newy2,newwidth2,newheight2)
 
-        if(newwidth2 >= 20 && newheight2 >=20){
+        if(newwidth2 >= 15 && newheight2 >=15){
             // stroke('blue')
             splitRectangle(newx2,newy2,newwidth2,newheight2)
         }
     }
     else {
-        division = random(0, w);
-        // rect(x,y,division,width-y)
-        // rect(division,y,width-division,height-y)
+        const division = random(0, w);
 
         //Rectangle 1
-        newx1 = x;
-        newy1 = y;
-        newwidth1 = division;
-        newheight1 = h;
+        const newx1 = x;
+        const newy1 = y;
+        const newwidth1 = division;
+        const newheight1 = h;
         rect(newx1,newy1,newwidth1,newheight1)
 
-        if(newwidth1 >= 20 && newheight1 >=20){
+        if(newwidth1 >= 15 && newheight1 >=15){
             // stroke('#000')
             splitRectangle(newx1,newy1,newwidth1,newheight1)
         }
 
         //Rectangle 2
-        newx2 = x+division;
-        newy2 = y;
-        newwidth2 = w-division;
-        newheight2 = h;
+        const newx2 = x+division;
+        const newy2 = y;
+        const newwidth2 = w-division;
+        const newheight2 = h;
         rect(newx2,newy2,newwidth2,newheight2)
 
-        if(newwidth2 >= 20 && newheight2 >=20){
+        if(newwidth2 >= 15 && newheight2 >=15){
             // stroke('#000')
             splitRectangle(newx2,newy2,newwidth2,newheight2)
         }

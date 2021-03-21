@@ -1,7 +1,7 @@
 var gui = new dat.GUI();
 var params = {
     Ellipse_Size: 30,
-    Random_Seed: 0,
+    Random_Seed: 418,
     Download_Image: function () { return save(); },
 };
 gui.add(params, "Ellipse_Size", 0, 100, 1);
@@ -13,51 +13,49 @@ function draw() {
     noFill();
     strokeWeight(1);
     stroke('#D63F20');
-    var debx = 0;
-    var deby = 0;
-    rect(debx, deby, width, height);
-    splitRectangle(debx, deby, width, height);
+    var debx = 40;
+    var deby = 60;
+    splitRectangle(debx, deby, width - (debx * 2), height - (deby * 2));
     stroke('#FDF1E1');
-    strokeWeight(40);
-    rect(debx, deby, width, height);
+    strokeWeight(2);
+    rect(debx, deby, width - (debx * 2), height - (deby * 2));
 }
 function splitRectangle(x, y, w, h) {
-    var division, newx1, newy1, newwidth1, newheight1, newx2, newy2, newwidth2, newheight2;
     if (random(0, 1) < 0.5) {
-        division = random(0, h);
-        newx1 = x;
-        newy1 = y;
-        newwidth1 = w;
-        newheight1 = division;
+        var division = random(0, h);
+        var newx1 = x;
+        var newy1 = y;
+        var newwidth1 = w;
+        var newheight1 = division;
         rect(newx1, newy1, newwidth1, newheight1);
-        if (newwidth1 >= 20 && newheight1 >= 20) {
+        if (newwidth1 >= 15 && newheight1 >= 15) {
             splitRectangle(newx1, newy1, newwidth1, newheight1);
         }
-        newx2 = x;
-        newy2 = y + division;
-        newwidth2 = w;
-        newheight2 = h - division;
+        var newx2 = x;
+        var newy2 = y + division;
+        var newwidth2 = w;
+        var newheight2 = h - division;
         rect(newx2, newy2, newwidth2, newheight2);
-        if (newwidth2 >= 20 && newheight2 >= 20) {
+        if (newwidth2 >= 15 && newheight2 >= 15) {
             splitRectangle(newx2, newy2, newwidth2, newheight2);
         }
     }
     else {
-        division = random(0, w);
-        newx1 = x;
-        newy1 = y;
-        newwidth1 = division;
-        newheight1 = h;
+        var division = random(0, w);
+        var newx1 = x;
+        var newy1 = y;
+        var newwidth1 = division;
+        var newheight1 = h;
         rect(newx1, newy1, newwidth1, newheight1);
-        if (newwidth1 >= 20 && newheight1 >= 20) {
+        if (newwidth1 >= 15 && newheight1 >= 15) {
             splitRectangle(newx1, newy1, newwidth1, newheight1);
         }
-        newx2 = x + division;
-        newy2 = y;
-        newwidth2 = w - division;
-        newheight2 = h;
+        var newx2 = x + division;
+        var newy2 = y;
+        var newwidth2 = w - division;
+        var newheight2 = h;
         rect(newx2, newy2, newwidth2, newheight2);
-        if (newwidth2 >= 20 && newheight2 >= 20) {
+        if (newwidth2 >= 15 && newheight2 >= 15) {
             splitRectangle(newx2, newy2, newwidth2, newheight2);
         }
     }
@@ -68,7 +66,7 @@ function setup() {
 function windowResized() {
     p6_ResizeCanvas();
 }
-var __ASPECT_RATIO = 1;
+var __ASPECT_RATIO = 0.7;
 var __MARGIN_SIZE = 25;
 function __desiredCanvasWidth() {
     var windowRatio = windowWidth / windowHeight;
